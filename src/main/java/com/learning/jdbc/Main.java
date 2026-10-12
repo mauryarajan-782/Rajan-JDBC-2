@@ -1,15 +1,39 @@
 package com.learning.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.SQLException;
+//import java.sql.Statement;
 
+
+import com.learning.jdbc.dao.EmployeeDao;
+import com.learning.jdbc.dao.EmployeedaoImpl;
 import com.learning.jdbc.entity.Employee;
 
 public class Main {
+	
+	public static void main(String[] args) {
+		
+//		Employee emp1 = new Employee(14, "Annsh kumar", "Male", 88000);
+		Employee emp1 = new Employee(11, "Ridhi", "Female", 88000);
+		
+		EmployeeDao eDao = new EmployeedaoImpl();
+		
+//		eDao.saveEmployee(emp1);
+		eDao.updateEmpData(emp1);
+		
+		System.err.println("Transaction comleted.............");
 
-	public static void main(String[] args) throws SQLException {
+	}
+
+}
+	
+
+
+
+
+
+//	public static void main(String[] args) throws SQLException {
 		
 //		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/java12","root","Maurya");
 //		Statement statement = connection.createStatement();
@@ -20,8 +44,7 @@ public class Main {
 //		Statement statement = DriverManager.getConnection("jdbc:mysql://localhost:3306/java12","root","Maurya").createStatement();
 //		statement.executeUpdate("insert into employee value(12, 'Niti', 'female', 85000)");
 		
-		DriverManager.getConnection("jdbc:mysql://localhost:3306/java12","root","Maurya").createStatement().executeUpdate("insert into employee value(13, 'Aarti', 'female', 85000)");
-		System.err.println("Transaction comleted.............");
-	}
-
-}
+//		DriverManager.getConnection("jdbc:mysql://localhost:3306/java12","root","Maurya").createStatement().executeUpdate("insert into employee value(13, 'Aarti', 'female', 85000)");
+		
+		
+//		System.err.println("Transaction comleted.............");
