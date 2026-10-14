@@ -1,5 +1,7 @@
 package com.learning.jdbc;
 
+import java.sql.SQLException;
+
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.SQLException;
@@ -12,15 +14,18 @@ import com.learning.jdbc.entity.Employee;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		
 //		Employee emp1 = new Employee(14, "Annsh kumar", "Male", 88000);
-		Employee emp1 = new Employee(11, "Ridhi", "Female", 88000);
-		
+//		Employee emp1 = new Employee(11, "Ridhi", "Female", 88000);  //Update
+		Employee emp1 = new Employee(15, "Sidhi", "Female", 88000);
+
 		EmployeeDao eDao = new EmployeedaoImpl();
 		
 //		eDao.saveEmployee(emp1);
-		eDao.updateEmpData(emp1);
+//		eDao.updateEmpData(emp1);
+		eDao.deleteEmpById(15);
+
 		
 		System.err.println("Transaction comleted.............");
 

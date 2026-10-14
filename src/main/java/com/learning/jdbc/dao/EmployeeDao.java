@@ -12,7 +12,7 @@ public interface EmployeeDao {
 
     public void updateEmpData(Employee e);
 
-    public void deletEmpById(int id) throws SQLException;
+    public void deleteEmpById(int id) throws SQLException;
 
     public Employee getEmpById(int id);
     

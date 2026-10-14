@@ -10,7 +10,9 @@ import com.learning.jdbc.entity.Employee;
 
 public class EmployeedaoImpl implements EmployeeDao {
 	
+	private static String INSERT_QUERY = "INSERT INTO EMPLOYEE VALUE (%d,'%s','%s',%d)";
 	private static String UPDATE_QUERY = "UPDATE EMPLOYEE SET NAME = '%s' , GENDER= '%s' , SALARY = %d WHERE ID = %d";
+	private static String DELETE_QUERY = "DELETE FROM EMPLOYEE WHERE ID = %d";
 
 	static Connection connection = null;
 
@@ -23,21 +25,36 @@ public class EmployeedaoImpl implements EmployeeDao {
 		}
 	}
 
+//	@Override
+//	public void saveEmployee(Employee e) {
+//		
+//		try (Statement statement = connection.createStatement()) {
+//
+//			statement.executeUpdate("insert into employee values(" + e.getId() + " ,'" + e.getName() + "','" + e.getGender()
+//					+ "'," + e.getSalary() + ")");
+//			
+//			System.err.println("insert into employee values(" + e.getId() + " ,'" + e.getName() + "','" + e.getGender()
+//			+ "'," + e.getSalary() + ")");
+//
+//		} catch (SQLException e1) {
+//			e1.printStackTrace();
+//		}
+//
+//	}
+	
 	@Override
 	public void saveEmployee(Employee e) {
 		
 		try (Statement statement = connection.createStatement()) {
-
-			statement.executeUpdate("insert into employee values(" + e.getId() + " ,'" + e.getName() + "','" + e.getGender()
-					+ "'," + e.getSalary() + ")");
 			
-			System.err.println("insert into employee values(" + e.getId() + " ,'" + e.getName() + "','" + e.getGender()
-			+ "'," + e.getSalary() + ")");
-
+			statement.executeUpdate(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
+			
+			System.err.println(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
+			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-
+		
 	}
 
 	@Override
@@ -56,8 +73,14 @@ public class EmployeedaoImpl implements EmployeeDao {
 	}
 
 	@Override
-	public void deletEmpById(int id) throws SQLException {
-		// TODO Auto-generated method stub
+	public void deleteEmpById(int id) throws SQLException{
+		
+		try (Statement statement = connection.createStatement()) {
+			
+			statement.executeUpdate(String.format(DELETE_QUERY, id));
+			
+			System.err.println(String.format(String.format(DELETE_QUERY, id)));
+		}
 
 	}
 
