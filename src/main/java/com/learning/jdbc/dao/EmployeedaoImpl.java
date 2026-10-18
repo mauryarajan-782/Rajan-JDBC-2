@@ -113,7 +113,7 @@ public class EmployeedaoImpl implements EmployeeDao {
 
 			ResultSet resultset = statement.executeQuery(String.format(SELECT_BY_ID_QUERY, id));
 
-			resultset.next(); 
+			resultset.next();
 				
 				emp.setId(resultset.getInt(1));
 				emp.setName(resultset.getString(2));
@@ -147,29 +147,7 @@ public class EmployeedaoImpl implements EmployeeDao {
 		}
 
 	}
-
-
-	@Override
-	public void printAllEmps(String name) {
-		
-		try (Statement statement = connection.createStatement()) {
-
-			System.err.println(SELECT_QUERY);
-
-			ResultSet resultset = statement.executeQuery(SELECT_QUERY);
-
-			while (resultset.next()) {
-
-				System.out.println("Id = " + resultset.getInt(1) + "\t Name =" + resultset.getString(2) + "\t Gender ="
-						+ resultset.getString(3) + "\t Salary =" + resultset.getInt(4));
-			}
-
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-
-	}
-
+	
 
 	@Override
 	public List<Employee> getAllEmp() {
@@ -177,4 +155,11 @@ public class EmployeedaoImpl implements EmployeeDao {
 		return null;
 	}
 	
+
+	@Override
+	public void printAllEmps(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
