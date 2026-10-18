@@ -1,10 +1,12 @@
 package com.learning.jdbc.dao;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Properties;
 
 import com.learning.jdbc.entity.Employee;
 
@@ -19,6 +21,15 @@ public class EmployeedaoImpl implements EmployeeDao {
 	static {
 
 		try {
+			
+//			Properties ps = new Properties();
+//			ps.put("user", "root");
+//			ps.put("password", "Maurya");
+//			
+//			Driver driver = new com.mysql.cj.jdbc.Driver();
+//			
+//			connection = driver.connect("jdbc:mysql://localhost:3306/java12", ps);
+			
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/java12", "root", "Maurya");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -62,7 +73,7 @@ public class EmployeedaoImpl implements EmployeeDao {
 		
 		try (Statement statement = connection.createStatement()) {
 
-			statement.executeUpdate(String.format("UPDATE EMPLOYEE SET NAME = '%s' , GENDER= '%s' , SALARY = %d WHERE ID = %d",e.getName(),e.getGender(),e.getSalary(),e.getId()));
+			statement.executeUpdate(String.format(UPDATE_QUERY,e.getName(),e.getGender(),e.getSalary(),e.getId()));
 			
 			System.err.println(String.format(UPDATE_QUERY,e.getName(),e.getGender(),e.getSalary(),e.getId()));
 
