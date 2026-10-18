@@ -39,9 +39,9 @@ public class Main {
 
 		EmployeeDao eDao = new EmployeedaoImpl();
 		
-//		eDao.saveEmployee(emp1);
+		eDao.saveEmployee(emp1);
 //		eDao.updateEmpData(emp1);
-		eDao.deleteEmpById(14);
+//		eDao.deleteEmpById(14);
 
 		
 		System.err.println("Transaction comleted.............");
