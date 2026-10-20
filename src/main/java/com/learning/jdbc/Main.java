@@ -43,13 +43,16 @@ public class Main {
 //		eDao.saveEmployee(emp1);
 //		eDao.updateEmpData(emp1);
 //		eDao.deleteEmpById(14);
-		eDao.printAllEmps();
+//		eDao.printAllEmps();
 		
 //		Employee em = eDao.getEmpById(4);
 //		System.out.println(em);
 		
-		System.out.println(eDao.getAllEmp());
-
+//		System.out.println(eDao.getAllEmp());
+		
+		//SQL Injection
+//		eDao.printEmpByName("abc' or 1 = 1 ");
+		eDao.printEmpByName("Riti'");
 		
 		System.err.println("Transaction comleted.............");
 

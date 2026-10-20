@@ -16,7 +16,7 @@ public interface EmployeeDao {
 
     public Employee getEmpById(int id);
     
-    public void printAllEmps(String name);
+    public void printEmpByName(String name);
 
     public void printAllEmps();
 

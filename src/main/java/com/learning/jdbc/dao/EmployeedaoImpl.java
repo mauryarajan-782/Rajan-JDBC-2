@@ -181,9 +181,25 @@ public class EmployeedaoImpl implements EmployeeDao {
 	
 
 	@Override
-	public void printAllEmps(String name) {
-		// TODO Auto-generated method stub
+	public void printEmpByName(String name) {
+
+		try (Statement statement = connection.createStatement()) {
+
+			System.err.println("SELECT * FROM EMPLOYEE WHERE NAME = '"+name);
+
+			ResultSet resultset = statement.executeQuery("SELECT * FROM EMPLOYEE WHERE NAME = '"+name);
+
+			while (resultset.next()) {
+
+				System.out.println("Id = " + resultset.getInt(1) + "\t Name =" + resultset.getString(2) + "\t Gender ="
+						+ resultset.getString(3) + "\t Salary =" + resultset.getInt(4));
+			}
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		
 	}
+
 
 }
