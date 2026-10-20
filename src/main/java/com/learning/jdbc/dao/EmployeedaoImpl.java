@@ -202,4 +202,18 @@ public class EmployeedaoImpl implements EmployeeDao {
 	}
 
 
+	@Override
+	public void saveEmployeeByps(Employee e) {
+		try (Statement statement = connection.createStatement()) {
+
+			statement.executeUpdate(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
+
+			System.err.println(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+
 }
