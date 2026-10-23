@@ -51,7 +51,7 @@ public class Main {
 //		System.out.println(eDao.getAllEmp());
 		
 		//SQL Injection
-//		eDao.printEmpByName("abc' or 1 = 1 ");
+		eDao.printEmpByName("abc' or 1 = 1 ");
 		eDao.printEmpByName("Riti'");
 		
 		System.err.println("Transaction comleted.............");
