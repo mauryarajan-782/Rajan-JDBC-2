@@ -9,8 +9,6 @@ public interface EmployeeDao {
 
 
     public void saveEmployee(Employee e);
-    
-    public void saveEmployeeByps(Employee e);
 
     public void updateEmpData(Employee e);
 

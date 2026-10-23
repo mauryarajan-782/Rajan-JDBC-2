@@ -3,6 +3,7 @@ package com.learning.jdbc.dao;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,15 +26,6 @@ public class EmployeedaoImpl implements EmployeeDao {
 	static {
 
 		try {
-
-//			Properties ps = new Properties();
-//			ps.put("user", "root");
-//			ps.put("password", "Maurya");
-//			
-//			Driver driver = new com.mysql.cj.jdbc.Driver();
-//			
-//			connection = driver.connect("jdbc:mysql://localhost:3306/java12", ps);
-
 			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/java12", "root", "Maurya");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,32 +33,19 @@ public class EmployeedaoImpl implements EmployeeDao {
 	}
 	
 
-//	@Override
-//	public void saveEmployee(Employee e) {
-//		
-//		try (Statement statement = connection.createStatement()) {
-//
-//			statement.executeUpdate("insert into employee values(" + e.getId() + " ,'" + e.getName() + "','" + e.getGender()
-//					+ "'," + e.getSalary() + ")");
-//			
-//			System.err.println("insert into employee values(" + e.getId() + " ,'" + e.getName() + "','" + e.getGender()
-//			+ "'," + e.getSalary() + ")");
-//
-//		} catch (SQLException e1) {
-//			e1.printStackTrace();
-//		}
-//
-//	}
-	
-
 	@Override
 	public void saveEmployee(Employee e) {
 
-		try (Statement statement = connection.createStatement()) {
+		try (PreparedStatement psmt = connection.prepareStatement("INSERT INTO EMPLOYEE VALUES(?,?,?,?)")) {
 
-			statement.executeUpdate(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
+			psmt.setInt(1, e.getId());
+			psmt.setString(2, e.getName());
+			psmt.setString(3, e.getGender());
+			psmt.setInt(4, e.getSalary());
+			
+			psmt.executeUpdate();
 
-			System.err.println(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
+			System.err.println("INSERT INTO EMPLOYEE VALUES(?,?,?,?)");
 
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -182,13 +161,16 @@ public class EmployeedaoImpl implements EmployeeDao {
 
 	@Override
 	public void printEmpByName(String name) {
+		
+		System.err.println("SELECT * FROM EMPLOYEE WHERE NAME = ?");
 
-		try (Statement statement = connection.createStatement()) {
+		try (PreparedStatement psmt = connection.prepareStatement("SELECT * FROM EMPLOYEE WHERE NAME = ?")) {
 
-			System.err.println("SELECT * FROM EMPLOYEE WHERE NAME = '"+name);
 
-			ResultSet resultset = statement.executeQuery("SELECT * FROM EMPLOYEE WHERE NAME = '"+name);
-
+			psmt.setString(1, name);
+			
+			ResultSet resultset = psmt.executeQuery();
+			
 			while (resultset.next()) {
 
 				System.out.println("Id = " + resultset.getInt(1) + "\t Name =" + resultset.getString(2) + "\t Gender ="
@@ -199,20 +181,6 @@ public class EmployeedaoImpl implements EmployeeDao {
 			e1.printStackTrace();
 		}
 		
-	}
-
-
-	@Override
-	public void saveEmployeeByps(Employee e) {
-		try (Statement statement = connection.createStatement()) {
-
-			statement.executeUpdate(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
-
-			System.err.println(String.format(INSERT_QUERY, e.getId(), e.getName(), e.getGender(), e.getSalary()));
-
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
 	}
 
 
